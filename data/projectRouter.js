@@ -17,6 +17,21 @@ router.get( '/' , async ( req, res ) => {
     }
 });
 
+//RECIEVING THE PROJECTS BY ID
+router.get( '/:id' , async ( req, res ) => {
+    try {
+        const projects = await Projects.get( req.query.id );
+        if ( projects ) {
+            res.status( 200 ).json( projects );
+        } else {
+            res.status( 404 ).json({ message: 'Project not found' })
+        }
+    } catch ( error ) {
+        console.log( error );
+        res.status( 500 ).json({ message: 'Error getting the projects' });
+    }
+});
+
 //ADD A PROJECT
 router.post( '/', async ( req, res ) => {
     console.log( req.body );
@@ -73,5 +88,16 @@ router.get( '/:id/actions' , async ( req, res ) => {
         res.status( 500 ).json({ message: 'Server Error Getting Actions' })
     }
 });
+
+// router.post( '/', async ( req, res ) => {
+//     console.log( req.body );
+//     try {
+//         const projects = await Projects.insert( req.body );
+//         res.status( 201 ).json( projects );
+//     } catch ( error ) {
+//         console.log( error );
+//         res.status( 500 ).json({ message: 'Error adding Project' });
+//     }
+// });
 
 module.exports = router;

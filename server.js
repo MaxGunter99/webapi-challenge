@@ -3,13 +3,25 @@
 
 / - ITS ALIVE
 
-Projects -
-    /api/projects - All Projects
-        -ADD PROJECT
-    /api/projects/:id/actions - See Actions on the Project
+    Projects -
+        /api/projects - All Projects
+            -ADD PROJECT
+        
+        /api/projects/:id
+            -UPDATE PROJECT
+            -DELETE { "id": :id }
+        
+        /api/projects/:id/actions - See Actions on the Project
+    _
 
-Actions -
-    /api/actions/:id - See Actions on the /:ID of the project
+    Actions -
+        /api/actions/:id - See Projects
+
+        /api/actions/:id/actions - see actions of project
+            -ADD
+            -DELETE { "id": :id }
+
+    _
 
 */
 
