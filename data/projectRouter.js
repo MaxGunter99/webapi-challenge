@@ -70,7 +70,7 @@ router.put( '/:id' , async ( req, res ) => {
         }
     } catch ( error ) {
         console.log( error );
-        res.status( 500 ).json({ message: 'Server Error Updating Post' });
+        res.status( 500 ).json({ message: 'Server Error Updating Project' });
     }
 });
 

@@ -36,13 +36,16 @@ router.get( '/:id/actions' , async ( req, res ) => {
 //ADDING PROJECTS ACTIONS
 router.post( '/:id/actions' , async ( req, res ) => {
     const project = { ...req.body, project_id: req.params.id }
-    console.log(project)
-    try {
-        const actions = await Actions.insert( project );
-        res.status( 201 ).json( actions );
-    } catch ( error ) {
-        console.log( error );
-        res.status( 500 ).json({ message: 'Server Error Adding Action' });
+    if (req.body.description.length > 128) {
+        console.log( 'message is too long (Over 128 characters)' )
+    } else {
+        try {
+            const actions = await Actions.insert( project );
+            res.status( 201 ).json( actions );
+        } catch ( error ) {
+            console.log( error );
+            res.status( 500 ).json({ message: 'Server Error Adding Action' });
+        }
     }
 });
 
@@ -61,6 +64,20 @@ router.delete( '/:id/actions', async ( req, res ) => {
     }
 });
 
+//UPDATING ACTIONS
+router.put( '/:id/actions' , async ( req, res ) => {
+    try {
+        const action = await Actions.update( req.params.id, req.body );
+        if ( action ) {
+            res.status( 200 ).json( action );
+        } else {
+            res.status( 404 ).json({ message: 'Action Not Found' });
+        }
+    } catch ( error ) {
+        console.log( error );
+        res.status( 500 ).json({ message: 'Server Error Updating Action' });
+    }
+});
 
 
 module.exports = router;
