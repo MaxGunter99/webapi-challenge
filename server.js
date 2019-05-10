@@ -19,6 +19,7 @@
 
         /api/actions/:id/actions - see actions of project
             -ADD
+            -UPDATE { "id": :id , "description": "" }
             -DELETE { "id": :id }
 
     _

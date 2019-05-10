@@ -67,7 +67,7 @@ router.delete( '/:id/actions', async ( req, res ) => {
 //UPDATING ACTIONS
 router.put( '/:id/actions' , async ( req, res ) => {
     try {
-        const action = await Actions.update( req.params.id, req.body );
+        const action = await Actions.update( req.body.id, req.body );
         if ( action ) {
             res.status( 200 ).json( action );
         } else {
